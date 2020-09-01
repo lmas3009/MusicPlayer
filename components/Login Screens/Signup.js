@@ -1,32 +1,24 @@
 import React, { Component } from 'react';
-import { View, Text ,Button,Image,StyleSheet,TextInput,TouchableOpacity} from 'react-native';
+import { View, Text ,Button,Image,StyleSheet,TextInput,TouchableOpacity,ScrollView} from 'react-native';
 import Applogo from '../../assets/applogo.png'
 
-
-export default class Signin extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
+export default class Signup extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+        <View style={styles.container}>
         <Image style={styles.applogo} source={Applogo}/>
-        <Text style={styles.subtitle}>Sign In using Email</Text>
+        <Text style={styles.subtitle}>Sign Up using Email</Text>
         <View style={styles.inputs}>
-            <View style={styles.textinput1}>
+            <View style={styles.textinput2}>
                 <TextInput 
                     style={styles.input}
                     placeholder="Email Id..."
                     placeholderTextColor="grey"
                     keyboardType='email-address'
-                    underlineColorAndroid='transparent'
                     />
             </View>
-            <View style={styles.textinput2}>
+            <View style={styles.textinput3}>
                 <TextInput 
                     style={styles.input}
                     placeholder="Password..."
@@ -36,15 +28,15 @@ export default class Signin extends Component {
             </View>
         </View>
         <View style={{marginTop: 50}}>
-        <TouchableOpacity onPress={()=>false}>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate("Next")}>
                 <View style={styles.loginbtn}>
-                    <Text style={styles.text}>Login</Text>
+                    <Text style={styles.text}>Next</Text>
                 </View>
             </TouchableOpacity>
         </View>
         <View style={{marginTop: 30,flexDirection:'row'}}>
             <Text style={{color:'white',fontSize: 15}}>Don't have an Acoount? </Text>
-            <Text onPress={()=>this.props.navigation.navigate("SignupPage")} style={{color:'white',fontSize: 15}}>Sign Up</Text>
+            <Text onPress={()=>this.props.navigation.pop()} style={{color:'white',fontSize: 15,marginBottom: 20}}>Sign In</Text>
         </View>
       </View>
     );
@@ -52,38 +44,54 @@ export default class Signin extends Component {
 }
 
 
+
+
+
+
+
 const styles = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor:'#000',
-        alignItems:'center'
+        alignItems:'center',
+        justifyContent:'center'
     },
     applogo:{
-        height: 120,
-        width: 120,
+        height: 150,
+        width: 150,
         borderRadius: 20,
-        marginTop: 50
+        marginTop: 30,
+        marginBottom: 20,
     },
     subtitle:{
         color:'white',
-        fontSize: 20,
+        fontSize: 25,
         marginRight: 30,
         marginLeft: 30,
         textAlign:'center',
         marginTop: 50,
+        fontWeight:'bold'
     },
     inputs:{
-        marginTop: 50,
+        marginTop: 50
     },  
     textinput1:{
-        height: 50,
+        marginTop: 20,
+        height: 60,
         width: 250,
         backgroundColor:'white',
         borderRadius:10
     },
     textinput2:{
         marginTop: 20,
-        height: 50,
+        height: 60,
+        width: 250,
+        backgroundColor:'white',
+        borderRadius:10
+    },
+    textinput3:{
+        marginTop: 20,
+        height: 60,
         width: 250,
         backgroundColor:'white',
         borderRadius:10
@@ -91,15 +99,15 @@ const styles = StyleSheet.create({
     input:{
         color:'black',
         height: 50,
-        width: 250,
+        width: 200,
         fontSize: 15,
-        borderRadius: 50, 
-        padding:'offset' ,
-        borderColor:'white'
+        marginLeft: 20,
+        justifyContent:'center',
+        flex:1
     },
     loginbtn:{
         height: 50,
-        width: 150,
+        width: 100,
         backgroundColor:'white',
         flexDirection:'row',
         alignItems:'center',
@@ -107,7 +115,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     text:{
-        fontSize: 15,
+        fontSize: 20,
         fontWeight:'bold',
     }
 })

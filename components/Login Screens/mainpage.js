@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
-import { Text, View ,StyleSheet,Image} from 'react-native'
+import { Text, View ,StyleSheet,Image, Button} from 'react-native'
 import Applogo from '../../assets/applogo.png'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {FontAwesome} from '@expo/vector-icons'
+import { NavigationHelpersContext } from '@react-navigation/native'
 
 export default class MainPage extends Component {
+    constructor(props){
+      super(props);
+    }
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Image style={styles.applogo} source={Applogo}/>
@@ -25,7 +30,13 @@ export default class MainPage extends Component {
                     <Text style={styles.text}>Sign In using Phone</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>this.props.navigation.navigate('SigninPage')}>
+            <TouchableOpacity onPress={()=>{
+                try {
+                    return navigate('Sigin')
+                } catch (error) {
+                    console.log(error)
+                }
+            }}>
                 <View style={styles.emailsign}>
                     <FontAwesome name="envelope" size={20} color='white'/>
                     <View style={{marginLeft: 20}}/>
@@ -38,17 +49,23 @@ export default class MainPage extends Component {
   }
 }
 
+function tryhello(){
+    
+}
+
+
 const styles = StyleSheet.create({
     container:{
         flex: 1,
         backgroundColor: '#000',
         alignItems: 'center',
+        justifyContent:'center'
     },
     applogo:{
-        height: 120,
-        width: 120,
+        height: 150,
+        width: 150,
         borderRadius: 20,
-        marginTop: 50
+        marginBottom: 50
     },
     subtitle:{
         color:'white',
