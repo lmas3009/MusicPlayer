@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View } from 'react-native'
 
-class Home extends Component {
+class Search extends Component {
 
   constructor(props){
     super(props);
@@ -39,30 +39,11 @@ class Home extends Component {
     }
 
     return (
-      <View style={[styles.container,{backgroundColor:this.state.bdcolor}]}>
-        <View style={{marginTop: 40, marginLeft: 30, flexDirection:'row', alignItems:'center'}}>
-          <Text style={[styles.text1,{color:this.state.textcolor}]}>Good </Text>
-          <Text style={[styles.day,{color:this.state.textcolor}]}>{this.state.day} </Text>
-        </View>
+      <View style={{backgroundColor:this.state.bdcolor,flex:1}}>
+        <Text> textInComponent </Text>
       </View>
     )
   }
 }
 
-export default Home
-
-const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    backgroundColor:'black',
-  },
-  text1:{
-    color:'white',
-    fontSize: 20
-  },
-  day:{
-    color:'white',
-    fontSize: 25,
-    fontWeight:'bold'
-  }
-})
+export default Search

@@ -8,9 +8,49 @@ import 'react-native-gesture-handler';
 import SignUp from './components/Login Screens/Signup'
 import Next1 from './components/Login Screens/nextbtn'
 import Home from './components/MainScreens/Home'
-import Bottomnav from './components/MainScreens/Bottomtabbar'
+import Search from './components/MainScreens/search'
+import Library from './components/MainScreens/library'
+import Account from './components/MainScreens/account'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {FontAwesome} from '@expo/vector-icons'
 
 
+const Tab  = createBottomTabNavigator();
+
+function Bottomnav(){
+    return (
+      <Tab.Navigator>
+          <Tab.Screen name="Home" component={Home} options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="home" color={color} size={23} />
+          ),
+        }}
+/>
+          <Tab.Screen name="Search" component={Search} options={{
+          tabBarLabel: 'Search',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="search" color={color} size={20} />
+          ),
+        }}
+/>
+          <Tab.Screen name="Library" component={Library} options={{
+          tabBarLabel: 'Library',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="th-list" color={color} size={23} />
+          ),
+        }}
+/>
+          <Tab.Screen name="Account" component={Account} options={{
+          tabBarLabel: 'Account',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user" color={color} size={23} />
+          ),
+        }}
+/>
+      </Tab.Navigator>
+    );
+}
 
 
 const Stack = createStackNavigator();
