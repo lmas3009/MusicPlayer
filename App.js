@@ -33,6 +33,7 @@ function Bottomnav(){
             <FontAwesome name="search" color={color} size={20} />
           ),
         }}
+
 />
           <Tab.Screen name="Library" component={Library} options={{
           tabBarLabel: 'Library',
