@@ -39,8 +39,8 @@ class Library extends Component {
     }
 
     return (
-      <View style={{backgroundColor:this.state.bdcolor,flex:1}}>
-        <Text> textInComponent </Text>
+      <View style={{backgroundColor:this.state.bdcolor,flex:1,justifyContent:'center',alignItems:'center'}}>
+        <Text style={{color:this.state.textcolor,fontSize: 20}}> Library </Text>
       </View>
     )
   }

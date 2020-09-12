@@ -106,13 +106,15 @@ class Search extends Component {
               keyExtractor = {(item) => item.id}
               data = {Song_type}
               renderItem = {({item}) => (
-                <View style={[styles.card1,{borderWidth: 1,borderColor:this.state.textcolor}]}>
-                  <ImageBackground source={item.bg} style={styles.card}  >
-                    <View style={{backgroundColor: "white",height: 25,alignItems:'center',justifyContent:'center'}}>
-                      <Text style = {{color:'black',fontSize: 15,fontWeight: 'bold'}} > {item.name} </Text>
-                    </View>
-                  </ImageBackground>
-                </View>
+                <TouchableOpacity onPress={()=> alert(item.name)} activeOpacity={0.5}>
+                  <View style={[styles.card1,{borderWidth: 1,borderColor:this.state.textcolor}]}>
+                    <ImageBackground source={item.bg} style={styles.card} imageStyle={{ borderRadius: 10}} >
+                      <View style={{backgroundColor: "white",height: 25,alignItems:'center',justifyContent:'center',borderBottomRightRadius: 7}}>
+                        <Text style = {{color:'black',fontSize: 15,fontWeight: 'bold'}} > {item.name} </Text>
+                      </View>
+                    </ImageBackground>
+                  </View>
+                </TouchableOpacity>
                 )}
             />
           </View>
@@ -164,7 +166,8 @@ const styles = StyleSheet.create({
     justifyContent:'flex-end',
   },
   card1:{
-    margin: 5
+    margin: 5,
+    borderRadius: 10
   },
   image: {
     borderRadius: 10
