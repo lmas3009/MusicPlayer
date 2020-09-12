@@ -1,6 +1,46 @@
 import React, { Component } from 'react'
-import { Text, View ,StyleSheet,ScrollView,TouchableOpacity,TextInput,FlatList} from 'react-native'
+import { Text, View ,StyleSheet,ScrollView,TouchableOpacity,TextInput,FlatList,Switch,ImageBackground} from 'react-native'
 import {FontAwesome} from '@expo/vector-icons'
+import Pop from '../../assets/pop.png'
+import Electronic from '../../assets/electronic.png'
+import Bollywood from '../../assets/bollywood.png'
+import HipHop from '../../assets/hip-hop.png'
+import Summer from '../../assets/summer.png'
+import Romance from '../../assets/romance.png'
+import Punjabi from '../../assets/punjabi.png'
+import Party from '../../assets/party.png'
+import Tamil from '../../assets/tamil.png'
+import Telugu from '../../assets/Telugu.png'
+import Wellness from '../../assets/wellness.png'
+import Rock from '../../assets/rock.png'
+import Chill from '../../assets/chill.png'
+import Meditaion from '../../assets/meditaion.png'
+import Sleep from '../../assets/sleep.png'
+import Soul from '../../assets/soul.png'
+import Gamming from '../../assets/gamming.png'
+import Jazz from '../../assets/jazz.png'
+
+
+const Song_type=[
+  { name:"Pop",id:1,bg:Pop },
+  { name:"Electronic",id:2,bg:Electronic },
+  { name:"Bollywood",id:3,bg:Bollywood },
+  { name:"Hip-Hop",id:4,bg: HipHop },
+  { name:"Summer",id:5 ,bg:Summer},
+  { name:"Romance",id:6 ,bg: Romance},
+  { name:"Punjabi",id:7 ,bg: Punjabi},
+  { name:"Party" ,id:8 ,bg: Party},
+  { name:"Tamil" ,id:9,bg: Tamil},
+  { name:"Telugu" ,id:10,bg: Telugu},
+  { name:"Wellness" ,id:12,bg: Wellness},
+  { name:"Rock" ,id:13,bg: Rock},
+  { name:"Chill" ,id:15,bg: Chill},
+  { name:"Meditation" ,id:16,bg: Meditaion},
+  { name:"Sleep" ,id:17,bg: Sleep},
+  { name:"Soul" ,id:18,bg: Soul},
+  { name:"Gamming" ,id:19,bg: Gamming},
+  { name:"Jazz" ,id:20,bg: Jazz},
+]
 
 class Search extends Component {
 
@@ -12,29 +52,8 @@ class Search extends Component {
       textcolor:'',
       textcolor1:''
     }
-    Song_type=[
-      { name:"Pop",id:1,bg:'lightgreen' },
-      { name:"Electronic",id:2,bg:'lightblue' },
-      { name:"Bollywood",id:3,bg:'red' },
-      { name:"Hip-Hop",id:4,bg:'orange' },
-      { name:"Summer",id:5 ,bg:'pink'},
-      { name:"Romance",id:6 ,bg:'lightpink'},
-      { name:"Punjabi",id:7 ,bg:'purple'},
-      { name:"Party" ,id:8 ,bg:'orange'},
-      { name:"Tamil" ,id:9,bg:'darkorange'},
-      { name:"Telugu" ,id:10,bg:'green'},
-      { name:"Marathi" ,id:11,bg:'darkred'},
-      { name:"Wellness" ,id:12,bg:'tomato'},
-      { name:"Rock" ,id:13,bg:'red'},
-      { name:"Mood" ,id:14,bg:'lightgrey'},
-      { name:"Chill" ,id:15,bg:'lightblue'},
-      { name:"Focus" ,id:16,bg:'lightpink'},
-      { name:"Sleep" ,id:17,bg:'lightblue'},
-      { name:"Soul" ,id:18,bg:'pink'},
-      { name:"Gamming" ,id:19,bg:'powderblue'},
-      { name:"Jazz" ,id:20,bg:'steelblue'},
-    ]
   }
+  
 
   render() {
     var date, hour
@@ -87,8 +106,12 @@ class Search extends Component {
               keyExtractor = {(item) => item.id}
               data = {Song_type}
               renderItem = {({item}) => (
-                <View style={[styles.card,{backgroundColor:item.bg}]}>
-                  <Text style = {{color:'white',marginTop: 10,marginLeft: 10,fontSize: 15,fontWeight: 'bold'}} > {item.name} </Text>
+                <View style={[styles.card1,{borderWidth: 1,borderColor:this.state.textcolor}]}>
+                  <ImageBackground source={item.bg} style={styles.card}  >
+                    <View style={{backgroundColor: "white",height: 25,alignItems:'center',justifyContent:'center'}}>
+                      <Text style = {{color:'black',fontSize: 15,fontWeight: 'bold'}} > {item.name} </Text>
+                    </View>
+                  </ImageBackground>
                 </View>
                 )}
             />
@@ -136,10 +159,14 @@ const styles = StyleSheet.create({
   card:{
     height: 100,
     width: 150,
-    backgroundColor:'white',
-    alignItems: 'flex-start',
-    marginLeft: 10,
-    marginBottom: 10,
+    resizeMode: "contain",
+    alignItems:'flex-end',
+    justifyContent:'flex-end',
+  },
+  card1:{
+    margin: 5
+  },
+  image: {
     borderRadius: 10
-  }
+  },
 })

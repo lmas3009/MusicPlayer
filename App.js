@@ -12,44 +12,78 @@ import Search from './components/MainScreens/search'
 import Library from './components/MainScreens/library'
 import Account from './components/MainScreens/account'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {FontAwesome} from '@expo/vector-icons'
+import {MaterialCommunityIcons } from '@expo/vector-icons'
 
 
 const Tab  = createBottomTabNavigator();
 
 function Bottomnav(){
     return (
-      <Tab.Navigator>
-          <Tab.Screen name="Home" component={Home} options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="home" color={color} size={23} />
+      <Tab.Navigator
+      initialRouteName="Home"
+      tabBarOptions={{
+        inactiveTintColor: 'gray',
+        activeTintColor: '#ff5b77',
+        showLabel: false,
+        tabStyle: {
+          backgroundColor: '#fff',
+          height: 60,
+          paddingBottom: 12,
+        },
+      }}>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({focused, color}) => (
+            <MaterialCommunityIcons
+              name={focused ? 'home' : 'home-outline'}
+              size={28}
+              color={color}
+            />
           ),
         }}
-/>
-          <Tab.Screen name="Search" component={Search} options={{
-          tabBarLabel: 'Search',
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="search" color={color} size={20} />
+      />
+      <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarIcon: ({focused, color}) => (
+            <MaterialCommunityIcons
+              name={focused ? 'folder-search' : 'folder-search-outline'}
+              size={28}
+              color={color}
+            />
           ),
         }}
-
-/>
-          <Tab.Screen name="Library" component={Library} options={{
-          tabBarLabel: 'Library',
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="th-list" color={color} size={23} />
+      />
+      <Tab.Screen
+        name="Library"
+        component={Library}
+        options={{
+          tabBarIcon: ({focused, color}) => (
+            <MaterialCommunityIcons
+              name={focused ? 'view-dashboard' : 'view-dashboard-outline'}
+              size={28}
+              color={color}
+            />
           ),
         }}
-/>
-          <Tab.Screen name="Account" component={Account} options={{
-          tabBarLabel: 'Account',
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="user" color={color} size={23} />
+      />
+      <Tab.Screen
+        name="Account"
+        component={Account}
+        options={{
+          tabBarIcon: ({focused, color}) => (
+            <MaterialCommunityIcons
+              name={focused ? 'account' : 'account-outline'}
+              size={28}
+              color={color}
+            />
           ),
         }}
-/>
-      </Tab.Navigator>
+      />
+    </Tab.Navigator>
     );
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View ,StyleSheet,ScrollView,TouchableOpacity} from 'react-native'
+import { Text, View ,StyleSheet,ScrollView,TouchableOpacity,Switch} from 'react-native'
 import {FontAwesome} from '@expo/vector-icons'
 
 
@@ -11,9 +11,21 @@ class Account extends Component {
       day:'',
       bdcolor:'',
       textcolor:'',
-      textcolor1:''
+      textcolor1:'',
+      switchValue:false,
+      switchValue1:false,
+      isEnabled:false,
+      isEnabled1:false,
     }
   }
+
+  toggleSwitch = (value) => {
+    this.setState({switchValue: value,isEnabled: value})
+ }
+ 
+ toggleSwitch1 = (value) => {
+  this.setState({switchValue1: value,isEnabled1: value})
+}
 
   render() {
     var date, hour
@@ -64,12 +76,24 @@ class Account extends Component {
         <View style={styles.settings}>
           <View style={{flexDirection:'row',justifyContent:'space-between'}}>
             <Text style={[styles.settinginfo,{color:this.state.textcolor1}]}>Notifications</Text>
-            <Text style={[styles.settinginfo,{color:this.state.textcolor1}]}>Switch</Text>
+            <Switch
+              trackColor={{ false: "#767577", true: "#81b0ff" }}
+              thumbColor={this.state.isEnabled ? "#f5dd4b" : this.state.textcolor}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={this.toggleSwitch}
+              value={this.state.isEnabled}
+            />
           </View>
           <View style={[styles.divider,{backgroundColor:this.state.textcolor1}]}/>
           <View style={{flexDirection:'row',justifyContent:'space-between'}}>
             <Text style={[styles.settinginfo,{color:this.state.textcolor1}]}>Updates</Text>
-            <Text style={[styles.settinginfo,{color:this.state.textcolor1}]}>Switch</Text>
+            <Switch
+              trackColor={{ false: "#767577", true: "#81b0ff" }}
+              thumbColor={this.state.isEnabled1 ? "#f5dd4b" : this.state.textcolor}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={this.toggleSwitch1}
+              value={this.state.isEnabled1}
+            />
           </View>
          {/*} <View style={[styles.divider,{backgroundColor:this.state.textcolor1}]}/>
           <View style={{flexDirection:'row',justifyContent:'space-between'}}>
