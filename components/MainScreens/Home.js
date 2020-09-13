@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet,ImageBackground,ScrollView,TouchableOpacity,FlatList,Image } from 'react-native'
+import { Text, View, StyleSheet,ImageBackground,ScrollView,TouchableOpacity,FlatList,Image,SafeAreaView } from 'react-native'
+import {MaterialCommunityIcons } from '@expo/vector-icons'
+import { color } from 'react-native-reanimated';
 
 
 const songs = [
@@ -55,7 +57,7 @@ const daily = [
   },
   {
     id: "2",
-    title: "Daily mix 4",
+    title: "Daily mix 3",
     url: "https://upload.wikimedia.org/wikipedia/en/e/e3/Solo_%28Clean_Bandit_song%29.png"
   },
   {
@@ -65,7 +67,7 @@ const daily = [
   },
   {
     id: "4",
-    title: "Daily mix 5",
+    title: "Daily mix 4",
     url: "https://upload.wikimedia.org/wikipedia/en/e/e3/Solo_%28Clean_Bandit_song%29.png"
   },
   {
@@ -75,17 +77,7 @@ const daily = [
   },
   {
     id: "6",
-    title: "Daily mix 6",
-    url: "https://upload.wikimedia.org/wikipedia/en/e/e3/Solo_%28Clean_Bandit_song%29.png"
-  },
-  {
-    id: "7",
-    title: "Daily mix 3",
-    url: "https://upload.wikimedia.org/wikipedia/en/e/e3/Solo_%28Clean_Bandit_song%29.png"
-  },
-  {
-    id: "8",
-    title: "Sunday \nSpecial",
+    title: "Daily mix 5",
     url: "https://upload.wikimedia.org/wikipedia/en/e/e3/Solo_%28Clean_Bandit_song%29.png"
   },
 ]
@@ -128,8 +120,10 @@ class Home extends Component {
       this.state.textcolor = "white"
     }
 
+
     return (
-      <View style={[styles.container,{backgroundColor:this.state.bdcolor}]}>
+      <ScrollView  style={{flex:1}}>
+        <View style={[styles.container,{backgroundColor:this.state.bdcolor}]}>
         <View style={{marginTop: 40, marginLeft: 30, flexDirection:'row', alignItems:'center'}}>
           <Text style={[styles.text1,{color:this.state.textcolor}]}>Good </Text>
           <Text style={[styles.day,{color:this.state.textcolor}]}>{this.state.day} </Text>
@@ -137,11 +131,11 @@ class Home extends Component {
         <View style={styles.recent}>
           <Text style={{color:this.state.textcolor,fontSize: 20}}>Recently Played</Text>
           <View>
-          <ScrollView style={{marginTop: 10}}
+          <ScrollView style={{marginTop: 10}} nestedScrollEnabled={true}
               horizontal={true} showsVerticalScrollIndicator={false}>
               {
                 songs.map((item, index) => (
-                  <TouchableOpacity onPress={()=> alert(item.title)} activeOpacity={0.5}>
+                  <TouchableOpacity key={item.id} onPress={()=> alert(item.title)} activeOpacity={0.5}>
                     <View style={[styles.card1,{borderWidth: 1,borderColor:this.state.textcolor}]}>
                       <ImageBackground source={{uri: item.artwork}} style={styles.image} imageStyle={{ borderRadius: 10}} >
                         <View style={{backgroundColor: "white",height: 20,width: 60,alignItems:'center',justifyContent:'center', borderRadius: 10,marginBottom: 5,marginRight: 5}}>
@@ -172,7 +166,59 @@ class Home extends Component {
               )}
               />
             </View>
-      </View>
+            <View style={{margin: 20}}>
+              <Text style={{color:this.state.textcolor,fontSize: 20}}>PlayLists</Text>
+                <View>
+                <ScrollView style={{marginTop: 10}} nestedScrollEnabled={true}
+                horizontal={true} showsVerticalScrollIndicator={false}>
+                {
+                  songs.map((item, index) => (
+                    <TouchableOpacity key={item.id} onPress={()=> alert(item.title)} activeOpacity={0.5}>
+                      <View style={[styles.card1,{borderWidth: 1,borderColor:this.state.textcolor}]}>
+                        <ImageBackground source={{uri: item.artwork}} style={styles.image} imageStyle={{ borderRadius: 10}} >
+                          <View style={{backgroundColor: "white",height: 20,width: 60,alignItems:'center',justifyContent:'center', borderRadius: 10,marginBottom: 5,marginRight: 5}}>
+                            <Text style = {{color:'black',fontSize: 12,fontWeight: 'bold'}} > Play ▶ </Text>
+                          </View>
+                        </ImageBackground>
+                      </View>
+                    </TouchableOpacity>
+                  ))
+                }
+              </ScrollView>
+                </View>
+            </View>
+              <View style={{margin: 10,alignItems:'center'}}>
+                  <FlatList
+                    numColumns = {1}
+                    keyExtractor = {(item) => item.id}
+                    data = {songs}
+                    renderItem = {({item}) => (
+                      <View style={{margin: 5}}>
+                        <TouchableOpacity style={[styles.dailymix1,{borderColor:this.state.textcolor}]} onPress={()=> alert("hello")}>
+                          <View style={{flexDirection:'row',alignItems:'center'}}>
+                            <Image source={{uri: item.artwork}} style={styles.image2}/>
+                            <View style={{flex:1,alignItems:'center',justifyContent: 'space-between',flexDirection:'row'}}>
+                              <View style={{marginLeft: 10}}>
+                                <Text style={[styles.dailytext,{color:this.state.textcolor}]}>{item.title}</Text>
+                                <Text style={[styles.dailytext,{color:this.state.textcolor}]}>{item.artist}</Text>
+                              </View>  
+                              <View style={{ flexDirection: 'row',alignItems:'center',marginRight: 10}}>
+                                <MaterialCommunityIcons
+                                  onPress={()=> alert("sadkjhkj")}
+                                  name='dots-vertical'
+                                  size={25}
+                                  color={this.state.textcolor}
+                                />
+                              </View>
+                            </View>
+                          </View>
+                        </TouchableOpacity>
+                      </View>
+                    )}
+                    />
+                  </View>
+              </View>
+      </ScrollView>
     )
   }
 }
@@ -212,17 +258,28 @@ const styles = StyleSheet.create({
     width: 50,
     borderRadius: 10
   },
+  image2:{
+    height: 70,
+    width: 70,
+    borderRadius: 10
+  },
   dailytext:{
     color:'white',
     fontSize: 15,
     marginLeft: 10,
     marginRight: 10,
-    textAlign:'center'
   },
   dailymix:{
     borderColor:'white',
     borderWidth: 1,
     borderRadius: 10,
     width: 160
+  },
+  dailymix1:{
+    borderColor:'white',
+    borderWidth: 1,
+    borderRadius: 10,
+    height: 73,
+    width: 320
   }
 })
