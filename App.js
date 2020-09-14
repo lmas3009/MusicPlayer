@@ -13,6 +13,7 @@ import Library from './components/MainScreens/library'
 import Account from './components/MainScreens/account'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {MaterialCommunityIcons } from '@expo/vector-icons'
+import Music_player from './components/ViewScreens/Music_play'
 
 
 const Tab  = createBottomTabNavigator();
@@ -100,6 +101,7 @@ function App() {
         <Stack.Screen name="Next" component={Next1} options={{headerShown: false}}/>
         <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
         <Stack.Screen name="Bottomnav" component={Bottomnav} options={{headerShown: false}}/>
+        <Stack.Screen name="Music_player" component={Music_player} />
       </Stack.Navigator>
     </NavigationContainer>
   );
