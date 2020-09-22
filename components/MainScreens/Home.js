@@ -89,11 +89,28 @@ class Home extends Component {
     this.state = {
       day:'',
       bdcolor:'',
-      textcolor:''
+      textcolor:'',
+      dataSource:null,
+      loading: true
     }
   }
 
+  
+
   render() {
+    fetch("https://pulsating-sort.000webhostapp.com/Search/Bollywood.php")
+            .then(response => response.json())
+            .then((responseJson) => {
+                setTimeout(() => {
+                    this.setState({
+                        dataSource: responseJson,
+                        lodaing : false
+                    })
+                }, 2000)
+
+            })
+            .catch(error => console.log(error))
+            
     var date, hour
  
     date = new Date();
@@ -119,7 +136,9 @@ class Home extends Component {
       this.state.bdcolor = 'black',
       this.state.textcolor = "white"
     }
-
+    
+    console.log(this.state.loading);
+    
 
     return (
       <ScrollView nestedScrollEnabled={true} >
@@ -170,17 +189,18 @@ class Home extends Component {
                 <View style={{margin: 10}}>
                   <Text style={{color:this.state.textcolor,fontSize: 20}}>PlayLists</Text>
                 </View>
-                  <View style={{alignItems:'center'}}>
-                  <FlatList nestedScrollEnabled={true}
+                  {this.state.loading ? <View style={{alignItems:'center'}}><FlatList nestedScrollEnabled={true}
                     numColumns = {1}
                     keyExtractor = {(item) => item.id}
-                    data = {songs}
+                    data = {this.state.dataSource}
                     renderItem = {({item}) => (
                       <View style={{margin: 5}}>
                         <TouchableOpacity style={[styles.dailymix1,{borderColor:this.state.textcolor}]} onPress={()=> this.props.navigation.navigate("Music_player",{
-            itemId: 86,
-            otherParam: item.url,}
-          )}>
+                            id: 86,
+                            url: item.url,
+                            artwork: item.artwork
+                          }
+                          )}>
                           <View style={{flexDirection:'row',alignItems:'center'}}>
                             <Image source={{uri: item.artwork}} style={styles.image2}/>
                             <View style={{flex:1,alignItems:'center',justifyContent: 'space-between',flexDirection:'row'}}>
@@ -201,8 +221,8 @@ class Home extends Component {
                         </TouchableOpacity>
                       </View>
                     )}
-                    /> 
-                  </View>
+                    /></View> : <Text>Loading</Text>}
+                  
                   </View>
               </View>
       </ScrollView>

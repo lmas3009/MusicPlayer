@@ -101,7 +101,7 @@ function App() {
         <Stack.Screen name="Next" component={Next1} options={{headerShown: false}}/>
         <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
         <Stack.Screen name="Bottomnav" component={Bottomnav} options={{headerShown: false}}/>
-        <Stack.Screen name="Music_player" component={Music_player} />
+        <Stack.Screen name="Music_player" component={Music_player} options={{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

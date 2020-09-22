@@ -90,7 +90,7 @@ class Search extends Component {
         <View style={[styles.search,{backgroundColor:this.state.textcolor}]}>
           <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
             <TextInput 
-              style={styles.input}
+              style={[styles.input,{color:this.state.bdcolor}]}
               placeholder="Search ..."
               placeholderTextColor={this.state.bdcolor}
               underlineColorAndroid='transparent'
