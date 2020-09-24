@@ -4,6 +4,7 @@ import Applogo from '../../assets/applogo.png'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {FontAwesome} from '@expo/vector-icons'
 import { NavigationHelpersContext } from '@react-navigation/native'
+import {SocialIcon} from 'react-native-elements'
 
 export default class MainPage extends Component {
     constructor(props){
@@ -16,33 +17,33 @@ export default class MainPage extends Component {
         <Image style={styles.applogo} source={Applogo}/>
         <Text style={styles.subtitle}>Lets Enjoy the day with Music</Text>
         <View style={styles.loginbtns}>
-            <TouchableOpacity>
-                <View style={styles.googlesign}>
-                    <FontAwesome name="google" size={20} />
-                    <View style={{marginLeft: 20}}/>
-                    <Text style={styles.text1}>Sign In using Google</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <View style={styles.phonesign}>
-                    <FontAwesome name="phone" size={20} color='white'/>
-                    <View style={{marginLeft: 20}}/>
-                    <Text style={styles.text}>Sign In using Phone</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=>{
-                try {
-                    return navigate('Sigin')
-                } catch (error) {
-                    console.log(error)
-                }
-            }}>
-                <View style={styles.emailsign}>
-                    <FontAwesome name="envelope" size={20} color='white'/>
-                    <View style={{marginLeft: 20}}/>
-                    <Text style={styles.text}>Sign In using Email</Text>
-                </View>
-            </TouchableOpacity>
+        <SocialIcon 
+          type="google"
+          button
+          title="Sign In Using Google"
+          style={{width: 250,borderRadius:10}}
+          onPress={()=>alert("Google")}
+        />
+        <SocialIcon 
+          type="phone"
+          button
+          style={{backgroundColor:'green',width: 250,borderRadius:10}}
+          title="Sign In Using Phone"
+          onPress={()=>alert("Phone")}
+        />
+        <SocialIcon 
+          type="envelope"
+          button
+          style={{backgroundColor:'red',width: 250,borderRadius:10}}
+          title="Sign In Using Email"
+          onPress={()=>{
+            try {
+                return navigate('Sigin')
+            } catch (error) {
+                console.log(error)
+            }
+        }}
+        />
         </View>
       </View>
     )
