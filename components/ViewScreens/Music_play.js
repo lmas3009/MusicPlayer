@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View, Image,Text,Button ,ImageBackground} from 'react-native'
-import { Ionicons,FontAwesome,MaterialCommunityIcons,Feather } from  '@expo/vector-icons'
+import { Ionicons,FontAwesome5,MaterialCommunityIcons,Feather,MaterialIcons } from  '@expo/vector-icons'
 import {Avatar, Icon} from 'react-native-elements'
 import { Audio } from 'expo-av'
 
@@ -12,7 +12,9 @@ export default class MusicPlayer extends React.Component {
         this.state={
           artwork: 'https://forum.byjus.com/wp-content/themes/qaengine/img/default-thumbnail.jpg',
           ver: true,
-          like:false
+          like:false,
+          title:"None",
+          artist:"None",
         }
     }  
     
@@ -20,6 +22,8 @@ export default class MusicPlayer extends React.Component {
  async componentDidMount(){
     const data = this.props.route.params.url;
     const artwork = this.props.route.params.artwork;
+    const title = this.props.route.params.title;
+    const artist = this.props.route.params.artist;
    Audio.setAudioModeAsync({
      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
      shouldDuckAndroid: true,
@@ -34,16 +38,15 @@ export default class MusicPlayer extends React.Component {
    }
    
    this.setState({
-     artwork: artwork
+     artwork: artwork,
+     artist: artist,
+     title: title
    })
    const source = {
     uri: `${data}`
   }
    
    this.Sound.loadAsync(source,status,false)
-   
-   this.Sound.stopAsync()
-   
  }
 
 
@@ -70,16 +73,16 @@ export default class MusicPlayer extends React.Component {
     var data=[];
         if(this.state.ver===true){
             data.push(
-              //<View style={{height:50,width: 50,backgroundColor:'#f6f7f8',borderRadius:50,justifyContent:'center',alignItems:'center'}}>
-                <Feather name="play" onPress={this.playSOund.bind(this) } style={{marginLeft:3}} color="black" size={35}/>
-              //</View>
+              <View  style={{height: 70,width: 70,backgroundColor:'#f6355d',borderRadius:50,justifyContent:'center',alignItems:'center'}}>
+                <Feather name="play" onPress={this.playSOund.bind(this)} style={{marginLeft:3}} color="white" size={35}/>
+              </View>
             )
         }
         else{
             data.push(
-              //<View style={{height:50,width: 50,backgroundColor:'#f6f7f8',borderRadius:50,justifyContent:'center',alignItems:'center'}}>
-                <Feather name="pause" onPress={this.pauseSound.bind(this)} color='black' size={35} />
-              //</View>
+              <View style={{height:70,width: 70,backgroundColor:'#f6355d',borderRadius:50,justifyContent:'center',alignItems:'center'}}>
+                <Feather name="pause" onPress={this.pauseSound.bind(this)} color='white' size={35} />
+              </View>
             )
         }
 
@@ -96,48 +99,46 @@ export default class MusicPlayer extends React.Component {
       >
       <View style={styles.container1}>
       <View style={{marginTop: "80%"}}/> 
+      {/*<Text style={{color:"white",fontSize: 30,fontWeight:'bold',marginBottom: 20}}>NOW PLAYING</Text>*/}
       <Image
-                style={{height: 200,width: 250,borderRadius: 10,resizeMode:'stretch'}}
+                style={{height: 200,width: 250,borderRadius: 20,resizeMode:'stretch'}}
                   source={{
                     uri:
                       this.state.artwork,
                   }}
                 />  
-                <View style={{flexDirection:'row'}}>
-                  {!this.state.like 
-                  ? 
-                  <MaterialCommunityIcons name="heart-outline" onPress={()=>this.setState({like:true})} size={30} color="black" /> 
-                  :
-                  <MaterialCommunityIcons name="heart" size={30} color="red" onPress={()=>this.setState({like:false})} />
-                  }
-                </View>
-      <View style={{marginTop: 50}}/> 
-      <View style={{flexDirection:"row",justifyContent:'space-between'}}>
-        <View style={{height:50,width: 50,backgroundColor:'#f6f7f8',borderRadius:50,justifyContent:'center',alignItems:'center'}}>
-          <MaterialCommunityIcons name="step-backward" size={35}  color="black" />
+                
+      <Text style={{marginTop:20,fontSize:20,fontWeight:"bold",textAlign:"center"}}>{this.state.title}</Text>
+      <Text style={{marginTop:5,marginLeft:20,marginRight: 20,marginBottom:10,fontSize:16,fontWeight:"bold",textAlign:"center",color:'grey'}}>{this.state.artist}</Text>
+                {/*<View style={{flexDirection:'row'}}>
+                  
+          {!this.state.like 
+          ? 
+          <MaterialCommunityIcons name="heart-outline" onPress={()=>this.setState({like:true})} size={30} color="black" /> 
+          :
+          <MaterialCommunityIcons name="heart" size={30} color="red" onPress={()=>this.setState({like:false})} />
+        }
+                </View>*/}
+      <View style={{marginTop: 30}}/> 
+      <View style={{flexDirection:"row",justifyContent:'space-between',alignItems:'center'}}>
+      <MaterialIcons name="replay-30" size={24} color="black" />
+        <View key={2} style={{marginLeft: 20}}/> 
+        <View key={1} style={{height:50,width: 50,backgroundColor:'#f6f7f8',borderRadius:50,justifyContent:'center',alignItems:'center'}}>
+          {/*<MaterialCommunityIcons name="step-backward" size={35} onPress={()=>alert("f")}  color="black" />*/}
+          <FontAwesome5 name="backward" size={30} color="black" />
         </View>
-        <View style={{marginLeft: 80}}/> 
+        <View key={2} style={{marginLeft: 20}}/> 
         {data}
-        <View style={{marginLeft: 80}}/>
-          <View style={{height:50,width: 50,backgroundColor:'#f6f7f8',borderRadius:50,justifyContent:'center',alignItems:'center'}}>
-          <MaterialCommunityIcons name="step-forward" size={35} color="black" />
+        <View style={{marginLeft: 20}}/>
+          <View key={3} style={{height:50,width: 50,backgroundColor:'#f6f7f8',borderRadius:50,justifyContent:'center',alignItems:'center'}}>
+            {/*<MaterialCommunityIcons name="step-forward" size={35} color="black" onPress={()=>alert("f")} />*/}
+            <FontAwesome5 name="forward" size={30} color="black" />
           </View>
+        <View key={2} style={{marginLeft: 20}}/> 
+          <MaterialIcons name="forward-30" size={24} color="black" />
       </View>
-      <View style={{marginTop: 50}}/> 
-      <Button
-      title="Stop"
-      onPress={this.stopSound.bind(this)}
-      />
-                    
-       {/*
-      <Button
-      title="Play"
-      onPress={this.playSOund.bind(this)}
-      />
-      <Button
-      title="Pause"
-      onPress={this.pauseSound.bind(this)}
-       />*/}
+      
+     
      
       </View>
 

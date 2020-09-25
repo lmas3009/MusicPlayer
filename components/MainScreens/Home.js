@@ -187,7 +187,7 @@ class Home extends Component {
             </View>
               <View style={{margin: 10}}>
                 <View style={{margin: 10}}>
-                  <Text style={{color:this.state.textcolor,fontSize: 20}}>PlayLists</Text>
+                  <Text style={{color:this.state.textcolor,fontSize: 20}}>Recommended for you</Text>
                 </View>
                   {this.state.loading ? <View style={{alignItems:'center'}}><FlatList nestedScrollEnabled={true}
                     numColumns = {1}
@@ -198,7 +198,9 @@ class Home extends Component {
                         <TouchableOpacity style={[styles.dailymix1,{borderColor:this.state.textcolor}]} onPress={()=> this.props.navigation.navigate("Music_player",{
                             id: 86,
                             url: item.url,
-                            artwork: item.artwork
+                            artwork: item.artwork,
+                            title: item.title,
+                            artist: item.artist
                           }
                           )}>
                           <View style={{flexDirection:'row',alignItems:'center'}}>
@@ -223,6 +225,11 @@ class Home extends Component {
                     )}
                     /></View> : <Text>Loading</Text>}
                   
+                  </View>
+                  <View style={{margin:10}}>    
+                    <View style={{margin: 10}}>
+                      <Text style={{color:this.state.textcolor,fontSize: 20}}>Popular Artists</Text>
+                    </View>
                   </View>
               </View>
       </ScrollView>
