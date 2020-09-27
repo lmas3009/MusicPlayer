@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View, Image,Text,Button ,ImageBackground} from 'react-native'
 import { Ionicons,FontAwesome5,MaterialCommunityIcons,Feather,MaterialIcons } from  '@expo/vector-icons'
-import {Avatar, Icon} from 'react-native-elements'
+import {Avatar, Icon,Slider } from 'react-native-elements'
 import { Audio } from 'expo-av'
+import TextTicker from 'react-native-text-ticker'
 
 
 export default class MusicPlayer extends React.Component {
@@ -15,6 +16,7 @@ export default class MusicPlayer extends React.Component {
           like:false,
           title:"None",
           artist:"None",
+          value: 0.0
         }
     }  
     
@@ -107,9 +109,26 @@ export default class MusicPlayer extends React.Component {
                       this.state.artwork,
                   }}
                 />  
-                
-      <Text style={{marginTop:20,fontSize:20,fontWeight:"bold",textAlign:"center"}}>{this.state.title}</Text>
-      <Text style={{marginTop:5,marginLeft:20,marginRight: 20,marginBottom:10,fontSize:16,fontWeight:"bold",textAlign:"center",color:'grey'}}>{this.state.artist}</Text>
+
+      <TextTicker
+                style={{marginTop:20,fontSize:20,fontWeight:"bold",textAlign:"center"}}
+                duration={3000}
+                loop
+                bounce
+                repeatSpacer={100}
+                marqueeDelay={3000}>
+                  {this.state.title}
+      </TextTicker>
+      
+      <TextTicker
+                style={{marginTop:5,marginLeft:20,marginRight: 20,marginBottom:10,fontSize:16,fontWeight:"bold",textAlign:"center",color:'grey'}}
+                duration={3000}
+                loop
+                bounce
+                repeatSpacer={100}
+                marqueeDelay={3000}>
+             {this.state.artist}
+      </TextTicker>
                 {/*<View style={{flexDirection:'row'}}>
                   
           {!this.state.like 
@@ -119,6 +138,13 @@ export default class MusicPlayer extends React.Component {
           <MaterialCommunityIcons name="heart" size={30} color="red" onPress={()=>this.setState({like:false})} />
         }
                 </View>*/}
+      <View style={{marginTop: 30}}/> 
+      <View style={{width: 300}}>
+      <Slider
+          value={this.state.value}
+          onValueChange={value => this.setState({ value })}
+        />
+      </View>
       <View style={{marginTop: 30}}/> 
       <View style={{flexDirection:"row",justifyContent:'space-between',alignItems:'center'}}>
       <MaterialIcons name="replay-30" size={24} color="black" />
